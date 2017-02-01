@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Restaurant, type: :model do
-  let("restaurant") {Restaurant.new()}
+  let(:restaurant) {Restaurant.new()}
 
   describe 'Validations' do
     it 'is not valid without a name' do
@@ -11,6 +11,13 @@ RSpec.describe Restaurant, type: :model do
     it 'is valid with a name' do
       restaurant.name = "Joe's Sub Shop"
       expect(restaurant).to be_valid
+    end
+
+    it 'does not allow duplicate restaurants' do
+      restaurant.name = "Joe's Sub Shop"
+      restaurant.save
+      restaurant2 = Restaurant.new(name: "Joe's Sub Shop")
+      expect(restaurant2).to_not be_valid
     end
   end
 
