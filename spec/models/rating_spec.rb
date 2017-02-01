@@ -39,6 +39,10 @@ RSpec.describe Rating, type: :model do
     end
 
     it 'is valid if all information provided' do
+      user = User.create(name: 'Collin', email: 'collin@test.com', password: 'pass123');
+      restaurant = Restaurant.create(name: 'Subs-R-Us')
+      rating.user_id = user.id
+      rating.restaurant_id = restaurant.id
       rating.score = 5
       expect(rating).to be_valid
     end
