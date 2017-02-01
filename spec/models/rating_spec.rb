@@ -47,4 +47,14 @@ RSpec.describe Rating, type: :model do
       expect(rating).to be_valid
     end
   end
+
+  describe 'Associations' do
+    it 'should belong to a User' do
+      expect(Rating.reflect_on_association(:user).macro).to eq :belongs_to
+    end
+
+    it 'should belong to a Restaurant' do
+      expect(Rating.reflect_on_association(:restaurant).macro).to eq :belongs_to
+    end
+  end
 end

@@ -13,4 +13,10 @@ RSpec.describe Restaurant, type: :model do
       expect(restaurant).to be_valid
     end
   end
+
+  describe 'Associations' do
+    it 'should have many Ratings' do
+      expect(Restaurant.reflect_on_association(:ratings).macro).to eq :has_many
+    end
+  end
 end

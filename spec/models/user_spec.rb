@@ -45,4 +45,14 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
   end
+
+  describe 'Associations' do
+    it 'should have many Ratings' do
+      expect(User.reflect_on_association(:ratings).macro).to eq :has_many
+    end
+
+    it 'should have many Rated Restaurant' do
+      expect(User.reflect_on_association(:rated_restaurants).macro).to eq :has_many
+    end
+  end
 end
