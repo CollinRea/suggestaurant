@@ -1,0 +1,11 @@
+<h3>Restaurants</h3>
+
+<%= link_to "Add New", new_restaurant_path %>
+
+<div class="container">
+  <% if @restaurants %>
+    <% @restaurants.each do |restaurant|%>
+      <p><%= restaurant.name%></p>
+    <% end %>
+  <% end %>
+</div>
