@@ -1,5 +1,7 @@
 # Suggestaurant
 
+[App Link](https://suggestaurant-sage.herokuapp.com/)
+
 Not sure where to eat lunch today? 
 
 *Suggestaurant* has you covered!
