@@ -3,7 +3,7 @@
 <%= link_to "Add New", new_restaurant_path %>
 
 <div class="container">
-  <table>
+  <table id="restaurant_table">
   <% if @restaurants %>
     <tr>
       <th>Name</th>
@@ -19,9 +19,9 @@
         <td><%= restaurant.average %></td>
         <% if logged_in? %>
           <% if my_rating = current_user.rating(restaurant.id) %>
-            <td><%= link_to my_rating, edit_rating_path(id: restaurant.id) %></td>
+            <td><%= link_to my_rating, edit_rating_path(id: restaurant.id), class: "edit_rating" %></td>
           <% else %>
-            <td><%= link_to 'Rate it!', new_rating_path %></td>
+            <td><%= link_to 'Rate it!', new_rating_path, class: "add_rating" %></td>
           <% end %>
         <% else %>
           <td><%= link_to 'Login', login_path %></td>
