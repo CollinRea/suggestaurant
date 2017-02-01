@@ -1,0 +1,22 @@
+<h3>Add Restaurant</h3>
+
+<ul>
+<% if @errors %>
+  <% @errors.each do |error| %>
+  <li><%= error %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<div id="form-container">
+
+  <%= form_for @restaurant do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
+    <%= f.label :last_visited %>
+    <%= f.date_field :last_visited %>
+    <%= submit_tag "Add" %>
+  <% end %>
+</div>
