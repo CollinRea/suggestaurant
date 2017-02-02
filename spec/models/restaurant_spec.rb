@@ -29,18 +29,28 @@ RSpec.describe Restaurant, type: :model do
 
   describe 'Methods' do
     before do
-      restaurant.name = "Joe's Sub Shop"
+      restaurant.name = "Jimmy Johns"
+      restaurant.last_visited = Date.yesterday
       restaurant.save
     end
 
-    it 'returns nil if no ratings exist' do
-      expect(restaurant.average).to be nil
+    it 'returns 0 if no ratings exist' do
+      expect(restaurant.average).to be 0
     end
 
     it 'returns average rating score' do
       user = User.create(name: 'Collin', email: 'collin@test.com', password: 'pass123');
       Rating.create(score: 5, user_id: user.id, restaurant_id: restaurant.id)
       expect(restaurant.average).to eq 5
+    end
+
+    it 'should return a score as an integer' do
+      expect(restaurant.suggestion_score).to be_an(Integer)
+    end
+
+    it 'should return an integer, even if never visisted' do
+      restaurant2 = Restaurant.new(name: "Joe's Sub Shop")
+      expect(restaurant2.suggestion_score).to be_an(Integer)
     end
   end
 end
