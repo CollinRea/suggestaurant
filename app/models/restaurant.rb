@@ -20,7 +20,7 @@ class Restaurant < ApplicationRecord
       if day_difference > 1
         last_visited_score = day_difference * 2
         rating_score = self.average * 10
-        rating_score + last_visited_score  
+        rating_score + last_visited_score 
       else
         0
       end
