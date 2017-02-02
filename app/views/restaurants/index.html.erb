@@ -19,7 +19,7 @@
         <td><%= restaurant.average %></td>
         <% if logged_in? %>
           <% if my_rating = current_user.rating(restaurant.id) %>
-            <td><%= link_to my_rating, edit_rating_path(id: restaurant.id), class: "edit_rating" %></td>
+            <td><%= link_to my_rating.score, edit_rating_path(id: my_rating.id), class: "edit_rating" %></td>
           <% else %>
             <td><%= link_to 'Rate it!', new_rating_path, class: "add_rating" %></td>
           <% end %>

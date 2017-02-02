@@ -12,19 +12,26 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
     if request.xhr?
-      name = params["restaurant_name"]
-      restaurant = Restaurant.find_by(name: name)
-      p 'Score'
-      p @rating
-      p 'Restaurant'
-      p restaurant
-      p current_user.id
+      restaurant = Restaurant.find_by(name: params["restaurant_name"])
       @rating.restaurant_id = restaurant.id
       @rating.user_id =current_user.id
-      p @rating
       if @rating.save
         redirect_to restaurants_path
       end
+    end
+  end
+
+  def edit
+    @rating = Rating.find(params[:id])
+    if request.xhr? 
+      render :edit, layout: false, locals: {rating: @rating}
+    end
+  end
+
+  def update
+    @rating = Rating.find(params[:id])
+    if @rating.update_columns({score: rating_params[:score]})
+      redirect_to restaurants_path
     end
   end
 
