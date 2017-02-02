@@ -17,10 +17,11 @@ class Restaurant < ApplicationRecord
   def suggestion_score
     begin
       visited_difference = (Date.today - self.last_visited).to_i
-      suggested_date = self.suggested || Date.today.last_month + Restaurant.count
+      # if never suggested, set value to a month ago
+      suggested_date = self.suggested || Date.today.last_month
       suggested_difference = (Date.today - suggested_date).to_i
 
-      # below variable in so scores can be adjusted later if needed
+      # below score modifiers can be adjusted later if needed
       last_visited_score = visited_difference * 2
       rating_score = self.average * 10
       suggested_score = suggested_difference * 1
