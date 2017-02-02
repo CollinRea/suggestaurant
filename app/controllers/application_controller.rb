@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   def index
     @suggestion = Restaurant.find_by(suggested: Date.today)
       if @suggestion.nil?
-        @suggestion = Restaurant.where("suggested != ?", Date.yesterday).sort_by(&:suggestion_score).reverse[0]
+        @suggestion = Restaurant.where.not(suggested: Date.yesterday).sort_by(&:suggestion_score).reverse[0]
         @suggestion.update(suggested: Date.today)
       end
     render "/index"

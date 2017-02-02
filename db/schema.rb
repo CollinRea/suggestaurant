@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 20170202163121) do
     t.string   "name"
     t.string   "category"
     t.date     "last_visited"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.date     "suggested"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.date     "suggested",    default: '-4712-01-01'
   end
 
   create_table "users", force: :cascade do |t|
