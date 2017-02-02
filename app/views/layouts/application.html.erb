@@ -15,8 +15,6 @@
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "Restaurants", restaurants_path %></li>
         <% if logged_in? %>
-        <!-- Need to add profile path to link below, can display all ratings for user -->
-        <li><%= link_to "#{current_user.name}", root_path %></li>
         <li><%= link_to "Logout", logout_path, method: "delete"%></li>
         <% else %>
         <li><%= link_to "Register", new_user_path %></li>

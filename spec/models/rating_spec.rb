@@ -38,6 +38,17 @@ RSpec.describe Rating, type: :model do
       expect(rating).to_not be_valid
     end
 
+    it 'is not valid if user_id is not unique for restaurant' do
+      user = User.create(name: 'Collin', email: 'collin@test.com', password: 'pass123');
+      restaurant = Restaurant.create(name: 'Subs-R-Us')
+      Rating.create(score: 1, user_id: user.id, restaurant_id: restaurant.id)
+      rating.user_id = user.id
+      rating.restaurant_id = restaurant.id
+      rating.score = 5
+      expect(rating).to_not be_valid
+
+    end
+
     it 'is valid if all information provided' do
       user = User.create(name: 'Collin', email: 'collin@test.com', password: 'pass123');
       restaurant = Restaurant.create(name: 'Subs-R-Us')

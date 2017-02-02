@@ -55,4 +55,18 @@ RSpec.describe User, type: :model do
       expect(User.reflect_on_association(:rated_restaurants).macro).to eq :has_many
     end
   end
+
+  describe 'Methods' do
+    let(:restaurant) { Restaurant.create(name: 'Subway') }
+    let(:user) { User.create(name: 'Collin', email: 'test@test.com', password: 'test123') }
+
+    it 'returns nil if no ratings for given restaurant' do
+      expect(user.rating(restaurant.id)).to be nil
+    end
+
+    it 'returns a rating for a given restaurant' do
+      rating = Rating.create(score: 3, restaurant_id: restaurant.id, user_id: user.id)
+      expect(user.rating(restaurant.id)).to eq rating
+    end
+  end
 end
