@@ -11,9 +11,6 @@
       <th>Average</th>
       <th>Your Rating</th>
       <th>Last Visited</th>
-      <% if logged_in? %>
-      <th>Edit Visited</th>
-      <% end %>
     </tr>
     <% @restaurants.each do |restaurant|%>
       <tr>
@@ -29,8 +26,8 @@
         <% else %>
           <td><%= link_to 'Login', login_path %></td>
         <% end %>
-        <td><%= restaurant.last_visited ? restaurant.last_visited.strftime("%b %-d, %Y") : nil  %></td>
-        <td>
+        <td class="date"><%= restaurant.last_visited ? restaurant.last_visited.strftime("%b %-d, %Y") : nil  %></td>
+        <td class =" edit_date">
           <%= form_for restaurant do |f| %>
             <%= f.date_field :last_visited %>
             <%= f.submit "edit" %>

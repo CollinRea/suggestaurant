@@ -18,18 +18,28 @@
   display: inline; 
 }
 
+* {
+  color: #333333;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #1d990f;
+}
+
 table {
 color: #333;
-font-family: Helvetica, Arial, sans-serif;
-width: 640px;
-border-collapse:
-collapse; border-spacing: 0;
+/*width: 640px;*/
+border-collapse:collapse; 
+border-spacing: 0;
 margin-top: 15px;
 }
 
 td, th {
 border: 1px solid transparent; 
 height: 30px;
+min-width: 120px;
 transition: all 0.3s; 
 }
 
@@ -42,6 +52,11 @@ td {
 background: #FAFAFA;
 text-align: center;
 }
+
+.date:hover {
+  cursor: pointer;
+}
+
 
 tr:nth-child(even) td { background: #F1F1F1; }
 

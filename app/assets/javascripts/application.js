@@ -16,6 +16,8 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
+  
+  $('.edit_date').hide();  
 
   $('#restaurant_table').on('click', 'a.add_rating', function (e) {
     e.preventDefault();
@@ -37,7 +39,7 @@ $(document).on('turbolinks:load', function() {
     restaurant_name = $(this).closest('tr').find('td')[0].innerText
     $input = $('<input type ="text" name="restaurant_name"/>').val(restaurant_name)
     $form.append($input)
-    data = $($form).serialize();
+    data = $form.serialize();
 
     $.ajax({
       url: url,
@@ -62,23 +64,34 @@ $(document).on('turbolinks:load', function() {
   $('#restaurant_table').on('submit', '.update_form', function (e) {
     e.preventDefault();
     $form = $(this)
-    // $td = $(this).closest('td')
     url = this.action
-    // console.log(url)
-    // restaurant_name = $(this).closest('tr').find('td')[0].innerText
-    // $input = $('<input type ="text" name="restaurant_name"/>').val(restaurant_name)
-    // $form.append($input)
-    data = $($form).serialize();
+    data = $form.serialize();
     $.ajax({
       url: url,
       method: 'PATCH',
       data: data
-    }).done(function(response) {
-      console.log(response)
+    });
+  });
+
+  $('#restaurant_table').on('click', '.date', function (e) {
+    $(this.nextElementSibling).toggle();
+  });
+
+  $('#restaurant_table').on('submit', '.edit_restaurant', function (e) {
+    e.preventDefault();
+    $form = $(this)
+    url = this.action
+    data = $form.serialize();
+
+    $.ajax({
+      url: url,
+      method: 'PATCH',
+      data: data
+    }).done(function(response){
+      location.href = location.href;
     });
     
   });
-
 });
 
 
