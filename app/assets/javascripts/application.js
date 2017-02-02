@@ -14,3 +14,71 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+
+  $('#restaurant_table').on('click', 'a.add_rating', function (e) {
+    e.preventDefault();
+    $td = $(this).closest('td')
+    url = $(this).attr('href')
+    $.ajax({
+      url: url,
+      method: 'GET'
+    }).done(function (response) {
+      $td.html(response)
+    });
+  });
+
+  $('#restaurant_table').on('submit', '.rating_form', function (e) {
+    e.preventDefault();
+    $form = $(this)
+    $td = $(this).closest('td')
+    url = this.action
+    restaurant_name = $(this).closest('tr').find('td')[0].innerText
+    $input = $('<input type ="text" name="restaurant_name"/>').val(restaurant_name)
+    $form.append($input)
+    data = $($form).serialize();
+
+    $.ajax({
+      url: url,
+      method: 'POST',
+      data: data
+    });
+    
+  });
+
+  $('#restaurant_table').on('click', '.edit_rating', function (e) {
+    e.preventDefault();
+    $td = $(this).closest('td')
+    url = $(this).attr('href')
+    $.ajax({
+      url: url,
+      method: 'GET'
+    }).done(function (response) {
+      $td.html(response)
+    });
+  });
+
+  $('#restaurant_table').on('submit', '.update_form', function (e) {
+    e.preventDefault();
+    $form = $(this)
+    // $td = $(this).closest('td')
+    url = this.action
+    // console.log(url)
+    // restaurant_name = $(this).closest('tr').find('td')[0].innerText
+    // $input = $('<input type ="text" name="restaurant_name"/>').val(restaurant_name)
+    // $form.append($input)
+    data = $($form).serialize();
+    $.ajax({
+      url: url,
+      method: 'PATCH',
+      data: data
+    }).done(function(response) {
+      console.log(response)
+    });
+    
+  });
+
+});
+
+

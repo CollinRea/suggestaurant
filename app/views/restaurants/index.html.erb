@@ -3,12 +3,13 @@
 <%= link_to "Add New", new_restaurant_path %>
 
 <div class="container">
-  <table>
+  <table id="restaurant_table">
   <% if @restaurants %>
     <tr>
       <th>Name</th>
       <th>Category</th>
-      <th>Rating</th>
+      <th>Average</th>
+      <th>Your Rating</th>
       <th>Last Visited</th>
     </tr>
     <% @restaurants.each do |restaurant|%>
@@ -16,7 +17,16 @@
         <td><%= restaurant.name %></td>
         <td><%= restaurant.category %></td>
         <td><%= restaurant.average %></td>
-        <td><%= restaurant.last_visited %></td>
+        <% if logged_in? %>
+          <% if my_rating = current_user.rating(restaurant.id) %>
+            <td><%= link_to my_rating.score, edit_rating_path(id: my_rating.id), class: "edit_rating" %></td>
+          <% else %>
+            <td><%= link_to 'Rate it!', new_rating_path, class: "add_rating" %></td>
+          <% end %>
+        <% else %>
+          <td><%= link_to 'Login', login_path %></td>
+        <% end %>
+        <td><%= restaurant.last_visited ? restaurant.last_visited.strftime("%b %-d, %Y") : nil  %></td>
       </tr>
     <% end %>
   <% end %>

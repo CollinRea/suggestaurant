@@ -9,4 +9,11 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def rating(restaurant_id)
+    rating = Rating.where(user_id: self.id, restaurant_id: restaurant_id)
+    if rating[0]
+      rating[0]
+    end
+  end
+
 end
