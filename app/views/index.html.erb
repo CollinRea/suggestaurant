@@ -5,3 +5,9 @@
 <p>Last Visited: <%= @suggestion.last_visited %></p>
 <p>Average Rating: <%= @suggestion.average %> of 5</p>
 
+<% if logged_in? %>
+  <%= form_for @suggestion, method: :patch, url: restaurant_path(@suggestion) do |f| %>
+    <%= f.hidden_field :last_visited, {value: Date.today} %>
+    <%= f.submit "Accept" %>
+  <% end %>
+<% end %>

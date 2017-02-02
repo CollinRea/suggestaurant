@@ -17,12 +17,12 @@ class Restaurant < ApplicationRecord
   def suggestion_score
     begin
       day_difference = (Date.today - self.last_visited).to_i
-      if day_difference == 1
-        0  
-      else
+      if day_difference > 1
         last_visited_score = day_difference * 2
         rating_score = self.average * 10
-        rating_score + last_visited_score
+        rating_score + last_visited_score  
+      else
+        0
       end
     rescue 
       100
