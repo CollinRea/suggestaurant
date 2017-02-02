@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
 
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.all.sort_by(&:average).reverse
   end
 
   def new
@@ -16,6 +16,12 @@ class RestaurantsController < ApplicationController
       @errors = restaurant.errors.full_messages
       render :new
     end
+  end
+
+  def update
+    restaurant = Restaurant.find(params[:id])
+    restaurant.update(restaurant_params)
+    redirect_to root_path
   end
 
   private
