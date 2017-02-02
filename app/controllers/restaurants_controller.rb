@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
 
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.all.sort_by(&:rating_score).reverse
   end
 
   def new

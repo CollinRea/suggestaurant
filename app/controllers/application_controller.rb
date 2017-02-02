@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
+    @suggestion = Restaurant.all.sort_by(&:suggestion_score).reverse[0]
     render "/index"
   end
 
