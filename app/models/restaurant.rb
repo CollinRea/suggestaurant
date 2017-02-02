@@ -16,15 +16,21 @@ class Restaurant < ApplicationRecord
 
   def suggestion_score
     begin
-      day_difference = (Date.today - self.last_visited).to_i
-      if day_difference > 1
-        last_visited_score = day_difference * 2
-        rating_score = self.average * 10
-        rating_score + last_visited_score 
-      else
-        0
-      end
+      visited_difference = (Date.today - self.last_visited).to_i
+      suggested_date = self.suggested || Date.today.last_month + Restaurant.count
+      suggested_difference = (Date.today - suggested_date).to_i
+
+      # below variable in so scores can be adjusted later if needed
+      last_visited_score = visited_difference * 2
+      rating_score = self.average * 10
+      suggested_score = suggested_difference * 1
+
+      # Total score returned 
+      rating_score + last_visited_score + suggested_score
     rescue 
+      # if restaurant is new or never visited the above code will raise exception
+      # rescue will return a score of 100 since restaurants that haven't been visited 
+      # should receive some priority in the suggestion queue
       100
     end
   end
