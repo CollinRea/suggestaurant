@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy', :via => :delete
 
-  root controller: 'application', action: 'index'
+  root controller: 'welcome', action: 'index'
 end

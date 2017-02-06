@@ -1,11 +1,15 @@
 
 <h3>Your Suggestion for Today:</h3>
-<h3><%= @suggestion.name %></h3>
-<p>Category: <%= @suggestion.category %></p>
-<p>Last Visited: <%= @suggestion.last_visited %></p>
-<p>Average Rating: <%= @suggestion.average %> of 5</p>
+<% if @suggestion %>
+  <h3><%= @suggestion.name %></h3>
+  <p>Category: <%= @suggestion.category %></p>
+  <p>Last Visited: <%= @suggestion.last_visited %></p>
+  <p>Average Rating: <%= @suggestion.average %> of 5</p>
+<% else %>
+  <h3>No Restaurants Available</h3>
+<% end %>
 
-<% if logged_in? %>
+<% if logged_in? && @suggestion %>
   <%= form_for @suggestion, method: :patch, url: restaurant_path(@suggestion) do |f| %>
     <%= f.hidden_field :last_visited, {value: Date.today} %>
     <%= f.submit "Accept" %>
